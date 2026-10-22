@@ -14,7 +14,7 @@ def fetch_one_pokemon(id):
         print(f"Failure to retrieve pokemon. Status code: {response.status_code}")
 
 
-def fetch_more_pokemon(count):
+def extract(count):
     poke_list = []
 
     for id in range(1, count + 2):
@@ -27,6 +27,6 @@ def fetch_more_pokemon(count):
     print(f"{len(poke_list)} Pokemon returned!")
     
 
-fetch_more_pokemon(150)
+extract(150)
 
 
