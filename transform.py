@@ -12,6 +12,19 @@ def transform(raw_poke_data):
             "weight": record["weight"],
             "base_experience": record.get("base_experience")
         })
+        for type in record["types"]:
+            slot = type["slot"]
+            type_name = type["type"]["name"]
+            type_url = type["type"]["url"]
+            
+            type_id = int(type_url.rstrip("/").split("/")[-1])
+
+            unique_types.update({type_id : type_name})
+
+
+
+
+
         pass
 
     
