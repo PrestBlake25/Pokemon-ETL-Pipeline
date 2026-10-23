@@ -17,7 +17,7 @@ def fetch_one_pokemon(id):
 def extract(count):
     poke_list = []
 
-    for id in range(1, count + 2):
+    for id in range(1, count + 1):
         poke = fetch_one_pokemon(id)
         poke_list.append(poke)
 
@@ -25,8 +25,9 @@ def extract(count):
     with open('raw_poke.json', "w") as file:
         file.write(raw_poke_json)
     print(f"{len(poke_list)} Pokemon returned!")
+
+    return poke_list
     
 
-extract(150)
 
 
