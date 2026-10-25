@@ -32,20 +32,20 @@ def transform(raw_poke_data):
             )
 
 
-        # 1. No duplicate Pokémon ids
+    # Checking for no duplicate Pokemon ids
     pokemon_ids = [row["id"] for row in poke_rows]
     assert len(pokemon_ids) == len(set(pokemon_ids)), "Duplicate Pokémon ids found"
 
-    # 2. Every type_id in the links exists in unique_types
+    # Checking if every type_id is connected to unique_types dictionary
     for link in poke_type_rows:
         assert link["type_id"] in unique_types, f"Unknown type_id: {link['type_id']}"
 
-    # 3. Each Pokémon has one or two type rows
+    # Each Pokémon has one or two type rows
     type_counts = Counter(link["pokemon_id"] for link in poke_type_rows)
     for pokemon_id in pokemon_ids:
         assert type_counts[pokemon_id] in (1, 2), f"Pokémon {pokemon_id} has {type_counts[pokemon_id]} types"
 
-    # ---- Step 8: return the three row sets ----
+    # Return the three row sets 
 
     types_rows = [
         {"id": type_id, "name": type_name}
