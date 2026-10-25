@@ -7,8 +7,7 @@ def fetch_one_pokemon(id):
     response = requests.get(poke_info)
 
     if response.status_code == 200:
-        print("Pokemon Retrived!")
-        print (response.json()['name'] + " added!")
+        print(response.json()["name"], " retrieval sucessful!")
         return response.json()
     else:
         print(f"Failure to retrieve pokemon. Status code: {response.status_code}")

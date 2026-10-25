@@ -45,26 +45,25 @@ def load(poke_rows, type_rows, poke_type_rows, db_path="pokemon.db"):
         """))
 
         # Creating the Dataframes
-         
-        pokemon_df = pd.Dataframe(poke_rows)
-        types_df = pd.Dataframe(type_rows)
-        poke_types_df = pd.Dataframe(poke_type_rows)
+    pokemon_df = pd.DataFrame(poke_rows)
+    types_df = pd.DataFrame(type_rows)
+    poke_types_df = pd.DataFrame(poke_type_rows)
 
 
 
         # Writing to the tables
-        with db_engine.begin() as conn:
-            # Clearing the old rows so reruns won't have duplicate data
+    with db_engine.begin() as conn:
+        # Clearing the old rows so reruns won't have duplicate data
 
-            conn.execute(text("""DELETE FROM pokemon_types"""))
-            conn.execute(text("""DELETE FROM pokemon"""))
-            conn.execute(text("""DELETE FROM types"""))
+        conn.execute(text("""DELETE FROM pokemon_types"""))
+        conn.execute(text("""DELETE FROM pokemon"""))
+        conn.execute(text("""DELETE FROM types"""))
 
-            types_df.to_sql("types", conn, if_exists="append", index=False)
-            pokemon_df.to_sql("pokemon", conn, if_exists="append", index=False)
-            poke_types_df.to_sql("pokemon_types", conn, if_exists="append", index=False)
+        types_df.to_sql("types", conn, if_exists="append", index=False)
+        pokemon_df.to_sql("pokemon", conn, if_exists="append", index=False)
+        poke_types_df.to_sql("pokemon_types", conn, if_exists="append", index=False)
 
-            # ---- Step 5: verify ----
+        # Verifying
     try:
         with db_engine.connect() as conn:
             # 1. Row counts
